@@ -1,28 +1,46 @@
 name: EKS Self Hosted Runner Test
-on: workflow_dispatch:
 
-jobs: test-runner: runs-on: github-runners
+on: 
+  workflow_dispatch:
 
-steps:
-  - name: Welcome
-    run: |
-      echo "Hello Partner!"
-      echo "Testing our EKS self-hosted runner"
+jobs: 
+  test-runner: 
+    runs-on: github-runners
 
-  - name: Runner Information
-    run: |
-      echo "Hostname:"
-      hostname
+    steps:
+      - name: Welcome
+        run: |
+          echo "Hello Partner!"
+          echo "Testing our EKS self-hosted runner"
 
-      echo "Operating System:"
-      uname -a
+      - name: Runner Information
+        run: |
+          echo "================================"
+          echo "EKS RUNNER INFORMATION"
+          echo "================================"
 
-      echo "Current Directory:"
-      pwd
+          echo "Hostname:"
+          hostname
 
-      echo "Runner Name: $RUNNER_NAME"
-      echo "Runner OS: $RUNNER_OS"
-      echo "Runner Architecture: $RUNNER_ARCH"
+          echo "Operating System:"
+          uname -a
 
-  - name: Test successful
-    run: echo "SUCCESS - Our EKS runner is working!"
+          echo "Current Directory:"
+          pwd
+
+          echo "Runner Name: $RUNNER_NAME"
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner Architecture: $RUNNER_ARCH"
+
+      - name: Verify GitHub Workspace
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "Workspace: $GITHUB_WORKSPACE"
+
+      - name: Test successful
+        run: |
+          echo "================================"
+          echo "SUCCESS!"
+          echo "Our EKS self-hosted runner is working!"
+          echo "================================"
